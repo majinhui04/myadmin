@@ -1,0 +1,270 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+body {
+    font-family: Helvetica, Tahoma, Arial, "华文细黑", "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+}
+.admin-wrapper .pagination{
+    margin: 0;
+}
+.search-wrapper{
+    padding: 15px 0 ;
+}
+.group-wrapper {
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 15px;
+}
+.input-group-wrapper {
+    vertical-align: middle;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 7px;
+}
+.input-group-wrapper .group-txt {
+    vertical-align: top;
+    width: 150px;
+    border: none;
+    background: #FFF;
+    height: 34px;
+    line-height: 34px;
+    outline: none;
+}
+.input-group-wrapper .group-btn {
+    vertical-align: top;
+    display: inline-block;
+    padding: 0 15px;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+    border: 0;
+    border-left: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3;
+}
+.table th {
+    text-align: center;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3;
+    /*background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);*/
+}
+.table .center{
+    text-align: center;
+}
+.table .left{
+    text-align: left;
+}
+.clearfix:after {
+    content: 'xxxxx';
+    display: block;
+    overflow: hidden;;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+}
+.headline1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.header {
+    position: relative;
+    height: 80px;
+    overflow: hidden;
+    background-color: #61636C;
+    background-color: #647688;
+    background-image: linear-gradient(to bottom, #647688, #384355);
+    background-repeat: repeat-x;
+}
+.header .logo {
+    display: inline-block;
+    margin-top: 20px;
+    height: 40px;
+    line-height: 40px;
+    color: #FFF;
+    font-size: 24px;
+    padding: 0 20px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    box-shadow:  -1px 0 0 rgba(0,0,0,0.3);
+}
+.header .info {
+    font-size: 14px;
+    color: #FFF;
+    display: inline-block;
+    padding: 0 15px;
+    height: 40px;
+    line-height: 40px;
+}
+.admin-container {
+    height: 300px;
+    overflow: hidden;
+    zoom:1;
+}
+.sidebar {
+    float: left;
+    width: 110px;
+    background-color: #f9f9fa;
+    height: 100%;
+    border-right: 1px solid #ddd; 
+}
+.sidebar-ul {
+    padding-left: 15px;
+    padding-top: 15px;
+}
+.sidebar-ul li{
+    position: relative;
+    margin-bottom: 5px;
+
+}
+.sidebar-nav-borderright {
+    width: 1px;
+    position: absolute;
+    height: 100%;
+    display: none;
+    position: absolute;
+    right: -1px;
+    top:0;
+    border-right: 1px solid #FFF;
+}
+.sidebar-link {
+    text-align: center;
+    color: #61636C;
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border: 1px solid transparent;
+  /*  margin-right: -1px;*/
+}
+.sidebar-link:hover{
+    font-weight: 700;
+    color: #61636C;
+    text-decoration: none;
+}
+.sidebar-ul .active a{
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    background-color: #FFF;
+}
+.sidebar-ul .active .sidebar-nav-borderright {
+    display: block;
+}
+.sidebar-icon {
+    font-size: 30px;
+}
+.sidebar-txt {
+    font-size: 12px;
+    line-height: 2;
+}
+.sidebar-icon,.sidebar-txt {
+    display: block;
+}
+.content {
+    height: 100%;
+    margin-left: 115px;
+    overflow:auto; 
+}
+.content-view {
+    padding: 15px;
+}
+
+/* 天蓝色风格 */
+.style-blue-1 {
+
+}
+.style-blue-1 .header{
+    background: none;
+    background-color: #5bc0de;
+}
+.style-blue-1 .sidebar-link {
+    color: #5bc0de;
+}
+.style-blue-1 .sidebar-link:hover{
+    color: #5bc0de;
+}
+
+/* 深蓝色风格 */
+.style-blue-2 {
+
+}
+.style-blue-2 .header{
+    background: none;
+    background-color: #0496DA;
+
+}
+.style-blue-2 .sidebar-link {
+    color: #0496DA;
+}
+.style-blue-2 .sidebar-link:hover{
+    color: #0496DA;
+}
+/* 淡红色风格 */
+.style-red-1 {
+
+}
+.style-red-1 .header{
+    background: none;
+    background-color: #F1736A;
+}
+.style-red-1 .sidebar-link {
+    color: #F1736A;
+}
+.style-red-1 .sidebar-link:hover{
+    color: #F1736A;
+}
+
+/* 紫色风格 */
+.style-purple-1{
+
+}
+.style-purple-1 .header{
+    background: none;
+    background-color: #6f5499;
+}
+.style-purple-1 .sidebar-link {
+    color: #6f5499;
+}
+.style-purple-1 .sidebar-link:hover{
+    color: #6f5499;
+}
+/* 绿色风格 */
+.style-green-1 .header{
+    background: none;
+    background-color: #5bb75b;
+}
+.style-green-1 .sidebar-link {
+    color: #5bb75b;
+}
+.style-green-1 .sidebar-link:hover{
+    color: #5bb75b;
+}
+
+/* custom */
+.style-custom-1 .header{
+    background: url(../img/admin/login_header_blurbg.jpg) no-repeat 0 0;
+}
+.style-custom-1 .sidebar-link {
+    
+}
+.style-custom-1 .sidebar-link:hover{
+    
+}
