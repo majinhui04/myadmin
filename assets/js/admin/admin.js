@@ -5,6 +5,7 @@ $(function(){
      */
     var resizeTimer;
     var resize = function(){
+  
         clearInterval(resizeTimer);
         resizeTimer = null;
         var winHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;

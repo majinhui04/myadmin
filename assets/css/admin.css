@@ -15,6 +15,9 @@ ul, li {
 a {
     text-decoration: none;
 }
+a:link,a:active{
+    text-decoration: none;
+}
 .form-wrapper {
     padding: 15px 0;
 }
@@ -40,7 +43,7 @@ a {
     margin-right: 5px;
 }
 .form-group-input {
-    display: block;
+    display: inline-block;
     width: 200px;
     height: 34px;
     padding: 6px 12px;
@@ -66,12 +69,22 @@ textarea.form-group-input {
     padding-top: 15px;
     padding-bottom: 15px;
 }
+.form-tips {
+    color: #ccc;
+}
 input.calendar {
     width: 200px;
     background: url(../img/admin/dateicon.png) no-repeat 180px center;
 }
-.admin-wrapper .pagination{
+.pagination-wrapper .pagination{
+    float: right;
     margin: 0;
+}
+.pagination-wrapper .pagination-info{
+    float: left;
+}
+.pagination-count {
+    color: red;
 }
 .search-wrapper{
     padding: 15px 0 ;
@@ -180,6 +193,29 @@ input.calendar {
     height: 40px;
     line-height: 40px;
 }
+.user-wrapper{
+    position: absolute;
+    right: 0;
+    top:15px;
+    padding-right: 20px;
+}
+.user-avatar {
+    margin-right: 7px;
+    border-radius: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    background: url(../img/admin/user-avatar.jpg) no-repeat 0 0;
+    background-size: 100%;
+}
+.user-name {
+    margin-right: 7px;
+    color: #FFF;
+}
+.user-logout-link {
+    text-decoration: none;
+}
 .admin-container {
     height: 300px;
     overflow: hidden;
@@ -218,6 +254,7 @@ input.calendar {
     padding-top: 10px;
     padding-bottom: 5px;
     border: 1px solid transparent;
+    text-decoration: none;
   /*  margin-right: -1px;*/
 }
 .sidebar-link:hover{
