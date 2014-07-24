@@ -1,5 +1,30 @@
 /*
-*  全局配置 
+    全局 api 配置 
+    请求地址:version + api
+    @params
+        demo:'统一本地资源前缀'
+        host:'http://api.igrow.com'
+        version:''  
+        mode: 'server' or 'demo' or '' 。 'server':全局使用服务器接口,'demo':全局使用本地模拟数据,'':根据匹配到的api具体配置
+ */
+(function(){
+    window.API = {
+        host:'http://' + location.host,
+        version:'',
+        demo:'/assets/api',
+        mode:'',
+        map:{
+            '/user/get':{
+                mode:'demo',
+                description:''
+            }
+            
+        }
+    };
+})();
+
+/*
+*  全局参数配置 
 *  IGrow = { api:'ajax前缀',dir:'网站根目录',modules = [] }
 */
 
@@ -28,40 +53,51 @@
                 template:'<div style=" text-align:center;padding:15px;">error</div>',
                 dependency:[]
             },
-            // 根据用户跳转
+            // 首页
             {
-                body:'',
-                route:'/homework/detail/:homeworkid',
-                title:'作业辅助-作业详情',
+                route:'/dashboard',
+                title:'',
                 controller: function($scope, $routeParams, $location) {
-                    var IGrow = window['IGrow'], user = IGrow.user, homeworkid = $routeParams.homeworkid,host = IGrow.host;
-
-                    if(user.typeid == 4){
-                        location.replace(host+'#/student/homework/detail/'+homeworkid);
-                        
-                    }else{
-                        location.replace(host+'#/class/homework/detail/'+homeworkid);
-                    }
+                    console.log(111)
                     
                 },
-                template: '',
+                template: '<h1 class="headline1">首页</h1>',
                 dependency:[],
                 description:'作业详情-跳转'
             },
+            // 文章列表
             {
-                body:'page',
-                route:['/student/profile','/:uid/student/profile'],
-                controller:'studentProfileController',
-                title:['我的资料','学生信息'],
-                controllerUrl:'modules/student/studentProfileController.js',
-                templateUrl:'modules/student/studentProfile.html',
-                description:'学生个人资料'
+                route:'/article',
+                controller:'articleController',
+                title:'文章列表',
+                controllerUrl:'/assets/js/controllers/article/articleController.js',
+                templateUrl:'/assets/js/controllers/article/article.html',
+                description:''
+            },
+            // 文章添加
+            {
+                route:'/article/add',
+                controller:'articleAddController',
+                title:'',
+                controllerUrl:'/assets/js/controllers/article/articleEditController.js',
+                templateUrl:'/assets/js/controllers/article/articleEdit.html',
+                description:''
+            },
+            // 文章编辑
+            {
+                route:'/article/update/:id',
+                controller:'articleUpdateController',
+                title:'',
+                controllerUrl:'/assets/js/controllers/article/articleEditController.js',
+                templateUrl:'/assets/js/controllers/article/articleEdit.html',
+                description:''
             }
             
             
         ]
     };
     
+
 
 })();
 
@@ -77,6 +113,9 @@
         // libs
         'angular-sanitize':'/assets/js/libs/angularjs/1.2.14/angular-sanitize.min.js',
         'angular-route':'/assets/js/libs/angularjs/1.2.14/angular-route.min.js',
+        'ueditor-config':'/assets/js/libs/ueditor/1.4.3/ueditor.config.js',
+        'ueditor-all':'/assets/js/libs/ueditor/1.4.3/ueditor.all.min.js',
+        'ueditor-lang':'/assets/js/libs/ueditor/1.4.3/lang/zh-cn/zh-cn.js',
         // plugins
         'datetimepicker.css':'/assets/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
         'datetimepicker.js':'/assets/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
@@ -97,7 +136,8 @@
         alias:alias,
         charset: 'utf-8',
         map: [
-            [ /^(.*\.(?:css|js))(.*)$/i, '$1?'+new Date().valueOf() ]
+            [ /(controllers\/\w+\/\w+)(\.js)/i,'$1$2?'+new Date().valueOf() ]
+            //[ /^(.*\.(?:css|js))(.*)$/i, '$1?'+new Date().valueOf() ]
         ]
     });
 

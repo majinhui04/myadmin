@@ -1,0 +1,70 @@
+<div class="wrapper">
+    <h1 class="headline1 clearfix">
+        <span class="headline1-txt">表单</span>
+        <button class="btn btn-default" ng-click="goBack()">
+            <i class="fa fa-reply"></i>
+            <span>返回</span>
+        </button>
+    </h1>
+    <div class="form-wrapper">
+        <form class="form-horizontal" role="form">
+            <div class="form-group-wrapper">
+                <label class="form-group-label">
+                    标题
+                </label>
+                <span class="form-group-content">
+                    <input type="text" class="form-group-input">
+                    <span class="form-tips">最多输入20个字</span>
+                </span>
+
+            </div>
+            <div class="form-group-wrapper">
+                <label class="form-group-label">
+                    作者
+                </label>
+                <span class="form-group-content">
+                    <input type="text" class="form-group-input">
+                </span>
+            </div>
+            <div class="form-group-wrapper">
+                <label class="form-group-label">
+                    发布时间
+                </label>
+                <span class="form-group-content">
+                    <input type="text" class="form-group-input calendar" readonly datetimepicker ng-model="a">
+                </span>
+            </div>
+            <div class="form-group-wrapper">
+                <label class="form-group-label">
+                    内容
+                </label>
+                <span class="form-group-content" style="position:relative;">
+                    <div id="editor"  style="width:700px;height:400px;"></div>
+                </span>
+            </div>
+            <div class="form-group-wrapper">
+                <label class="form-group-label">
+                    是否置顶
+                </label>
+                <span class="form-group-content">
+                    <label>
+                        <input type="radio" class="form-group-checkbox" name="topRadio">是
+                    </label>
+                    <label>
+                        <input type="radio" class="form-group-checkbox" name="topRadio" checked>否
+                    </label>
+                </span>
+            </div>
+            <div class="form-group-action">
+               
+                <button type="button" class="btn btn-primary">
+                    保存
+                </button>
+             
+            </div>
+        </form>
+
+
+
+    </div>
+</div>
