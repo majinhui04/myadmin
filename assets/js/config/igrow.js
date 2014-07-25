@@ -14,9 +14,62 @@
         demo:'/assets/api',
         mode:'',
         map:{
+            /* 用户 */
             '/user/get':{
                 mode:'demo',
                 description:''
+            },
+
+            /* 文章类别 */
+            '/topicType/search':{
+                mode:'demo',
+                description:'文章类别搜索'
+            },
+            '/topicType/list':{
+                mode:'demo',
+                description:'文章类别列表'
+            },
+            '/topicType/get':{
+                mode:'demo',
+                description:'文章类别获取'
+            },
+            '/topicType/update':{
+                mode:'demo',
+                description:'文章类别更新'
+            },
+            '/topicType/create':{
+                mode:'demo',
+                description:'文章类别创建'
+            },
+            '/topicType/delete':{
+                mode:'demo',
+                description:'文章类别删除'
+            },
+
+            /* 文章 */
+            '/topic/search':{
+                mode:'demo',
+                description:'文章类别搜索'
+            },
+            '/topic/list':{
+                mode:'demo',
+                description:'文章类别列表'
+            },
+            '/topic/get':{
+                mode:'demo',
+                description:'文章类别获取'
+            },
+            '/topic/update':{
+                mode:'demo',
+                description:'文章类别更新'
+            },
+            '/topic/create':{
+                mode:'demo',
+                description:'文章类别创建'
+            },
+            '/topic/delete':{
+                mode:'demo',
+                description:'文章类别删除'
             }
             
         }
@@ -33,8 +86,8 @@
     var IGrow = window['IGrow'] = {
         host:'http://' + location.host,
         dir:'http://' + location.host + '/',
-        page:'_page',
-        pagesize:'_pagesize',
+        page:'page',
+        pagesize:'pagesize',
         log:function(){
             console.log.apply(console,arguments);
         },
@@ -56,7 +109,7 @@
             // 首页
             {
                 route:'/dashboard',
-                title:'',
+                title:'首页',
                 controller: function($scope, $routeParams, $location) {
                     console.log(111)
                     
@@ -65,6 +118,43 @@
                 dependency:[],
                 description:'作业详情-跳转'
             },
+
+            /* 
+                文章类别
+
+            */
+            // 文章类别列表
+            {
+                route:'/article_type',
+                controller:'articleTypeController',
+                title:'文章类别列表',
+                controllerUrl:'/assets/js/controllers/article/articleTypeController.js',
+                templateUrl:'/assets/js/controllers/article/articleType.html',
+                description:''
+            },
+            // 文章类别添加
+            {
+                route:'/article_type/add',
+                controller:'articleTypeAddController',
+                title:'文章类别添加',
+                controllerUrl:'/assets/js/controllers/article/articleTypeController.js',
+                templateUrl:'/assets/js/controllers/article/articleTypeEdit.html',
+                description:''
+            },
+            // 文章类别编辑
+            {
+                route:'/article_type/update/:id',
+                controller:'articleTypeUpdateController',
+                title:'文章类别编辑',
+                controllerUrl:'/assets/js/controllers/article/articleTypeController.js',
+                templateUrl:'/assets/js/controllers/article/articleTypeEdit.html',
+                description:''
+            },
+
+            /* 
+                文章 
+
+            */
             // 文章列表
             {
                 route:'/article',
@@ -78,7 +168,7 @@
             {
                 route:'/article/add',
                 controller:'articleAddController',
-                title:'',
+                title:'文章添加',
                 controllerUrl:'/assets/js/controllers/article/articleEditController.js',
                 templateUrl:'/assets/js/controllers/article/articleEdit.html',
                 description:''
@@ -87,7 +177,7 @@
             {
                 route:'/article/update/:id',
                 controller:'articleUpdateController',
-                title:'',
+                title:'文章编辑',
                 controllerUrl:'/assets/js/controllers/article/articleEditController.js',
                 templateUrl:'/assets/js/controllers/article/articleEdit.html',
                 description:''

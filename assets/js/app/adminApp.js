@@ -32,6 +32,51 @@ define(function(require, exports, module) {
             $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
         }
     ]);
+
+
+    /*分页*/
+    app.directive('pagination', function () {
+       
+        return {
+            restrict: 'A',
+            require: '?ngModel',
+            link: function (scope, elm, attr, ngModelCtrl) {
+
+                var pageModel = scope[attr.ngModel];
+                var target = attr.ngModel+'.total';
+        
+                if(!ngModelCtrl) return;
+                if(!pageModel) return;
+            
+                scope.$watch(target, function (total) {
+                    var pageModel = scope[attr.ngModel];
+                
+                    pageModel.page = pageModel.page || 1;
+                    page = pageModel.page;
+                
+                    total = total ? total : 0;
+                    //console.log(total)
+                    if (total === 0) {
+                        elm.html('');
+                        return;
+                    }
+                    elm.addClass('pagination');
+                    elm.pagination(total,{
+                        current_page:page - 1,
+                        items_per_page:pageModel.pagesize,
+                        $scope:scope,
+                        callback:function(page){
+                            pageModel.page = page+1;
+                            pageModel.click && pageModel.click(page+1);
+                            return false;
+                        }
+                    }); 
+
+                });
+               
+            }
+        }
+    });
     // 若图片加载不出来
     app.directive('imgError',function(){
         return {
@@ -138,11 +183,20 @@ define(function(require, exports, module) {
 
         return Utils.mNotice;
     });
-    app.controller('adminController',['$scope','$q','$route','$timeout','routeConfig','resource', 'mLoading','mNotice','$routeParams',function($scope,$q,$route,$timeout,routeConfig,resource,mLoading,mNotice,$routeParams){
+    app.controller('adminController',['$scope','$q','$route','$timeout','routeConfig','resource', 'mLoading','mNotice','$routeParams','$route',function($scope,$q,$route,$timeout,routeConfig,resource,mLoading,mNotice,$routeParams,$route){
         var userDao = resource('/user');
        
             
+        $scope.reload = function($event){
+            var target = $event.currentTarget,
+                href = target.href,
+                hash = location.hash;
 
+            if(href.indexOf(hash)>-1) {
+                $route.reload();
+            }
+            
+        };
         $scope.run = function(){
             bind();
             // 获取当前用户
@@ -241,10 +295,13 @@ define(function(require, exports, module) {
 
             function hashChange(hash) {
                 var hash = hash || location.hash|| '',
-                    $target = $('.sidebar').find('[href="'+hash+'"]'),
+                    match = /(#\/\w+)\/?\S*?/.exec(hash),
+                    route = match?match[1]:'',
+                    $target = $('.sidebar').find('[href="'+route+'"]'),
                     title = $target.attr('data-title') || '',
                     $parent = $target.parent();
 
+                console.log(hash,route)
                 if(!$target.length) {
                     return;
                 }

@@ -388,8 +388,8 @@ define(function(require, exports, module) {
                         var url = this.url + '/list',
                             data = data || {};
 
-                        data[page] = data._page ? data._page : 1;
-                        data[pagesize] = data._pagesize ? data._pagesize : 20;
+                        data[page] = data[page] ? data[page] : 1;
+                        data[pagesize] = data[pagesize] ? data[pagesize] : 20;
                         url = checkURL(url);
 
                         return http.get(url, data ,successCallback, failCallback,always);
@@ -405,8 +405,8 @@ define(function(require, exports, module) {
                         var url = this.url + '/search',
                             data = data || {};
 
-                        data[page] = data._page ? data._page : 1;
-                        data[pagesize] = data._pagesize ? data._pagesize : 20;
+                        data[page] = data[page] ? data[page] : 1;
+                        data[pagesize] = data[pagesize] ? data[pagesize] : 20;
                         url = checkURL(url);
 
                         return http.get(url, data,successCallback, failCallback,always);
