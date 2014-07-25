@@ -7,21 +7,20 @@
 
     <link rel="stylesheet" type="text/css" href="./assets/js/libs/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./assets/js/plugins/igrow/qaq/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/js/plugins/igrow/qaq/qaq.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/plugins.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/admin.css">
 
     <script type="text/javascript" src="./assets/js/libs/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="./assets/js/plugins/jquery/jquery.cookie.js"></script>
     <script type="text/javascript" src="./assets/js/libs/seajs/2.0.0/sea.js"></script>
     <script type="text/javascript" src="./assets/js/public/utils.js"></script>
     <script type="text/javascript" src="./assets/js/config/igrow.js"></script>
     <script type="text/javascript" src="./assets/js/libs/angularjs/1.2.14/angular.min.js"></script>
-    <script type="text/javascript" src="./assets/js/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
  
     <script type="text/javascript" src="./assets/js/plugins/igrow/qaq/qaq.js"></script>
 
-    <script type="text/javascript" src="./assets/js/libs/ueditor/1.4.3/ueditor.config.js"></script>
-    <script type="text/javascript" src="./assets/js/libs/ueditor/1.4.3/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="./assets/js/config/ueditor.config.js"></script>
     <script type="text/javascript" src="./assets/js/libs/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body class="admin-wrapper style-custom-1" ng-controller="adminController">
@@ -73,6 +72,13 @@
                     <a href="#/set" class="sidebar-link " ng-click="reload($event)">
                         <span class="sidebar-icon fa fa-cogs"></span>
                         <span class="sidebar-txt">设置</span>
+                    </a>
+                    <i class="sidebar-nav-borderright"></i>
+                </li>
+                <li class="">
+                    <a href="#/404" class="sidebar-link " ng-click="reload($event)">
+                        <span class="sidebar-icon fa fa-bug"></span>
+                        <span class="sidebar-txt">404</span>
                     </a>
                     <i class="sidebar-nav-borderright"></i>
                 </li>

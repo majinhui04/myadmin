@@ -15,7 +15,27 @@
         mode:'',
         map:{
             /* 用户 */
+            '/user/search':{
+                mode:'demo',
+                description:''
+            },
+            '/user/list':{
+                mode:'demo',
+                description:''
+            },
             '/user/get':{
+                mode:'demo',
+                description:''
+            },
+            '/user/update':{
+                mode:'demo',
+                description:''
+            },
+            '/user/create':{
+                mode:'demo',
+                description:''
+            },
+            '/user/delete':{
                 mode:'demo',
                 description:''
             },
@@ -91,13 +111,19 @@
         log:function(){
             console.log.apply(console,arguments);
         },
-        constant:{
-        },
+        seajs_dir:'', // 配置seajs路径
         modules:[
             /* 公共 */
             /*{
                 redirectTo:'/error'
             },*/
+            {
+                body:'404',
+                route:'/404',
+                title:'error',
+                template:'<div class="error-404">404 Error</div>',
+                dependency:[]
+            },
             /*出错*/
             {
                 body:'',
@@ -114,7 +140,7 @@
                     console.log(111)
                     
                 },
-                template: '<h1 class="headline1">首页</h1>',
+                template: '<div class="wrapper"><div class="welcome"><img src="/assets/img/public/welcome.jpg"></div></div>',
                 dependency:[],
                 description:'作业详情-跳转'
             },
@@ -181,12 +207,42 @@
                 controllerUrl:'/assets/js/controllers/article/articleEditController.js',
                 templateUrl:'/assets/js/controllers/article/articleEdit.html',
                 description:''
+            },
+
+            /* 
+                用户 
+
+            */
+            {
+                route:'/user',
+                controller:'userController',
+                title:'用户列表',
+                controllerUrl:'/assets/js/controllers/user/userController.js',
+                templateUrl:'/assets/js/controllers/user/user.html',
+                description:''
+            },
+            {
+                route:'/user/add',
+                controller:'userAddController',
+                title:'用户添加',
+                controllerUrl:'/assets/js/controllers/user/userController.js',
+                templateUrl:'/assets/js/controllers/user/userEdit.html',
+                description:''
+            },
+            {
+                route:'/user/update/:id',
+                controller:'userUpdateController',
+                title:'用户编辑',
+                controllerUrl:'/assets/js/controllers/user/userController.js',
+                templateUrl:'/assets/js/controllers/user/userEdit.html',
+                description:''
             }
             
             
         ]
     };
     
+
 
 
 })();
@@ -197,7 +253,7 @@
 *  
 */
 (function(){
-   
+    var seajs_dir = window['IGrow']['seajs_dir'] || '';
     // 设置别名
     var alias = {
         // libs
@@ -220,6 +276,9 @@
         // seajs app
         'adminApp':'/assets/js/app/adminApp.js'
 
+    };
+    for(var key in alias){
+        alias[key] = seajs_dir + alias[key];
     };
 
     window['seajs'] && seajs.config({

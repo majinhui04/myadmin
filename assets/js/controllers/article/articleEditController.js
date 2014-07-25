@@ -1,7 +1,6 @@
 define(function(require,module,exports){
-    /*require('ueditor-config');
+    /*require('ueditor-config');*/
     require('ueditor-all');
-    require('ueditor-lang');*/
     var adminApp = require('adminApp');
 
     adminApp.register.controller('articleAddController',['$scope', '$q', 'mLoading','mNotice','resource',
