@@ -39,6 +39,10 @@
                 mode:'demo',
                 description:''
             },
+            '/user/validate':{
+                mode:'demo',
+                description:''
+            },
 
             /* 文章类别 */
             '/topicType/search':{
