@@ -5,8 +5,8 @@ define(function(require,module,exports){
 
     adminApp.register.controller('articleAddController',['$scope', '$q', 'mLoading','mNotice','resource',
         function($scope, $q, mLoading,mNotice,resource){
-            var articleDao = resource('/topic');
-            var articleTypeDao = resource('/topicType');
+            var articleDao = resource('/topic',{ extra:'article' });
+            var articleTypeDao = resource('/topicType',{ extra:'articletype' });
             var date = new Date();
             var $editor = $('.editor');
             var timeStamp = new Date().valueOf();
@@ -18,7 +18,7 @@ define(function(require,module,exports){
 
                 console.log(formData,content)
                 
-
+                formData.content = content;
                 mLoading.show('正在保存');
                 articleDao.create(formData,function(result){
                     mLoading.success(function(){
@@ -42,7 +42,7 @@ define(function(require,module,exports){
 
                 $scope._action = '添加';
                 $scope.formData = {
-                    create_time:Utils.formatDate(date,'yyyy-MM-dd hh:mm'),
+                    publishtime:Utils.formatDate(date,'yyyy-MM-dd hh:mm'),
                     author:'匿名',
                     istop:0,
                     isshow:1
@@ -68,20 +68,24 @@ define(function(require,module,exports){
 
     adminApp.register.controller('articleUpdateController',['$scope', '$q', 'mLoading','mNotice','resource','$routeParams',
         function($scope, $q, mLoading,mNotice,resource,$routeParams){
-            var articleDao = resource('/topic');
-            var articleTypeDao = resource('/topicType');
+            var articleDao = resource('/topic',{ extra:'article' });
+            var articleTypeDao = resource('/topicType',{ extra:'articletype' });
             var date = new Date();
             var $editor = $('.editor');
             var timeStamp = new Date().valueOf();
             var editorID = 'editor'+timeStamp;
-        
+            
+            setTimeout(function(){
+                UE.getEditor(editorID);
+            },200);
+            
             $scope.save  = function(){
                 var formData = $scope.formData,
                     content = UE.getEditor(editorID).getContent();
 
                 console.log(formData,content)
                 
-
+                formData.content = content;
                 mLoading.show('正在保存');
                 articleDao.update(formData,function(result){
                     mLoading.success(function(){
@@ -97,11 +101,6 @@ define(function(require,module,exports){
             $scope.run = function(){
 
                 $editor.attr('id',editorID);
-            
-                UE.getEditor(editorID).ready(function() {
-                    //this是当前创建的编辑器实例
-                    this.setContent('')
-                });
 
                 $scope._action = '修改';
                 
@@ -119,13 +118,21 @@ define(function(require,module,exports){
                 // 获取文章详情
                 var promise2 = articleDao.get({id:$routeParams.id},function(result){
                     $scope.formData = result.data || {};
+
                     $scope.formData.typeid = $scope.formData.type.id;
-                    UE.getEditor(editorID).setContent($scope.formData.content);
+                    //return;
+                    
 
                 },function(result){
                     mNotice(result.message,'error');
                 },function(){
                     mLoading.hide();
+                });
+
+                $q.all([promise1,promise2]).then(function(){
+                    UE.getEditor(editorID).ready(function(){
+                        this.setContent($scope.formData.content);
+                    });
                 });
             };
 

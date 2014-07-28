@@ -225,14 +225,17 @@ define(function(require, exports, module) {
                     $http(config).success(function(data, status, headers, config) {
                         var message;
                 
-                        if (data.code && data.code != 0) {
-
+                        if (data.code && data.code > 200) {
+                            
                             message = data.message;
                             deferred.reject({
                                 status:status,
                                 message: message
                             });
-
+                            failCallback && failCallback({
+                                status:status,
+                                message: message
+                            });
                             
                         } else {
                             if(expire){
@@ -243,9 +246,9 @@ define(function(require, exports, module) {
                             }
                             successCallback && successCallback(data);
                             deferred.resolve(data);
-                            always && always();
+                            
                         }
-
+                        always && always();
 
                     }).error(function(data, status, headers, config) {
                         var message = '';
@@ -370,7 +373,13 @@ define(function(require, exports, module) {
                     }
                     
                 } else {
-                    url = version + url;
+                    var server = API.server || '';
+
+                    if( (match = map[url]) ){
+                        server = match.server? match.server:server; 
+                    }
+
+                    url = server?server:version + url;
                 }
 
                 return url;
@@ -388,6 +397,7 @@ define(function(require, exports, module) {
                         var url = this.url + '/list',
                             data = data || {};
 
+                        if(options.extra){data['__action'] = options.extra+'.list';}
                         data[page] = data[page] ? data[page] : 1;
                         data[pagesize] = data[pagesize] ? data[pagesize] : 20;
                         url = checkURL(url);
@@ -398,6 +408,7 @@ define(function(require, exports, module) {
                         var url = this.url + '/get',
                             data = data || {};
 
+                        if(options.extra){data['__action'] = options.extra+'.get';}
                         url = checkURL(url);
                         return http.get(url, data, successCallback, failCallback,always);
                     },
@@ -405,6 +416,7 @@ define(function(require, exports, module) {
                         var url = this.url + '/search',
                             data = data || {};
 
+                        if(options.extra){data['__action'] = options.extra+'.search';}
                         data[page] = data[page] ? data[page] : 1;
                         data[pagesize] = data[pagesize] ? data[pagesize] : 20;
                         url = checkURL(url);
@@ -415,6 +427,7 @@ define(function(require, exports, module) {
                         var url = this.url + '/delete',
                             data = data || {};
 
+                        if(options.extra){data['__action'] = options.extra+'.delete';}
                         url = checkURL(url);
 
                         return http.get(url, data,successCallback, failCallback,always);
@@ -423,6 +436,7 @@ define(function(require, exports, module) {
                         var url = this.url + '/create',
                             data = data || {};
 
+                        if(options.extra){data['__action'] = options.extra+'.create';}
                         url = checkURL(url);
 
                         return http.post(url, data,successCallback, failCallback,always);
@@ -431,6 +445,7 @@ define(function(require, exports, module) {
                         var url = this.url + '/update',
                             data = data || {};
 
+                        if(options.extra){data['__action'] = options.extra+'.update';}
                         url = checkURL(url);
                         return http.post(url, data,successCallback, failCallback,always);
                     }

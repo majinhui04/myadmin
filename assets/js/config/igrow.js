@@ -12,6 +12,7 @@
         host:'http://' + location.host,
         version:'',
         demo:'/assets/api',
+        server:'/app/dao/dao.php',
         mode:'',
         map:{
             /* 用户 */
@@ -46,53 +47,53 @@
 
             /* 文章类别 */
             '/topicType/search':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别搜索'
             },
             '/topicType/list':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别列表'
             },
             '/topicType/get':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别获取'
             },
             '/topicType/update':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别更新'
             },
             '/topicType/create':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别创建'
             },
             '/topicType/delete':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别删除'
             },
 
             /* 文章 */
             '/topic/search':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别搜索'
             },
             '/topic/list':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别列表'
             },
             '/topic/get':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别获取'
             },
             '/topic/update':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别更新'
             },
             '/topic/create':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别创建'
             },
             '/topic/delete':{
-                mode:'demo',
+                //mode:'demo',
                 description:'文章类别删除'
             }
             
@@ -110,8 +111,8 @@
     var IGrow = window['IGrow'] = {
         host:'http://' + location.host,
         dir:'http://' + location.host + '/',
-        page:'page',
-        pagesize:'pagesize',
+        page:'_page',
+        pagesize:'_pagesize',
         log:function(){
             console.log.apply(console,arguments);
         },

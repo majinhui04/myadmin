@@ -9,7 +9,7 @@ define(function(require, exports, module) {
     // 列表
     app.register.controller('articleTypeController', ['$scope', '$q', 'mLoading','mNotice','resource',
         function($scope, $q, mLoading,mNotice,resource) {
-            var articleTypeDao = resource('/topicType');
+            var articleTypeDao = resource('/topicType', { extra:'articletype' });
 
             // 批量删除 默认disabled
             $scope.checked = false;
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
             $scope.list = function(){
                 
                 mLoading.show();
-                articleTypeDao.list({ index:0 },function(result){
+                articleTypeDao.list({ },function(result){
                     var list = result.data || [];
                     
                     $scope.dataList = list;
@@ -102,7 +102,7 @@ define(function(require, exports, module) {
     // 更新
     app.register.controller('articleTypeUpdateController', ['$scope', '$q', 'mLoading','mNotice','resource','$routeParams',
         function($scope, $q, mLoading,mNotice,resource,$routeParams) {
-            var articleTypeDao = resource('/topicType'),
+            var articleTypeDao = resource('/topicType', { extra:'articletype' }),
                 id = $routeParams.id;
 
             $scope._action = '修改';
@@ -148,7 +148,7 @@ define(function(require, exports, module) {
     // 添加
     app.register.controller('articleTypeAddController', ['$scope', '$q', 'mLoading','mNotice','resource','$routeParams',
         function($scope, $q, mLoading,mNotice,resource,$routeParams) {
-            var articleTypeDao = resource('/topicType');
+            var articleTypeDao = resource('/topicType', { extra:'articletype' });
 
             $scope._action = '添加';
             $scope.formData = {};

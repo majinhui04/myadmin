@@ -28,6 +28,7 @@
                 <th class="">发布时间</th>
                 <th class="">类别</th>
                 <th class="">显示</th>
+                <th class="">置顶</th>
                 <th class="actions">操作</th>
             </tr>
         </thead>
@@ -40,13 +41,16 @@
                     {{data.title}}
                 </td>
                 <td class="center article-time">
-                    {{data._create_time}}
+                    {{data._publishtime}}
                 </td>
                 <td class="center article-type">
                     {{data.type.name}}
                 </td>
                 <td class="center article-show">
-                    yes
+                    {{data.isshow}}
+                </td>
+                <td class="center article-top">
+                    {{data.istop}}
                 </td>
                 <td class="center actions">
                     <a href="#/article/update/{{data.id}}">编辑</a>

@@ -3,7 +3,7 @@ define(function(require,module,exports){
 
     app.register.controller('articleController',['$scope', '$q', 'mLoading','mNotice','resource',
         function($scope, $q, mLoading,mNotice,resource){
-            var articleDao = resource('/topic');
+            var articleDao = resource('/topic',{ extra:'article' });
 
             // 分页
             $scope.pageModel = {
@@ -63,13 +63,14 @@ define(function(require,module,exports){
 
                 mLoading.show();
                 articleDao.list({ page:page,pagesize:pagesize,title:title },function(result){
-                    var list = result.data || [], extra = result.extra || {};
+                    var list = result.data || [], total = result.total || 0;
                     
                     angular.forEach(list, function(item, _){
-                        item._create_time = item.create_time.substring(0,10);
+                        item._publishtime = item.publishtime || '';
+                        // /item._create_time = item.create_time.substring(0,10);
                     });
                     $scope.dataList = list;
-                    $scope.pageModel.total = extra.total;
+                    $scope.pageModel.total = total;
 
                 },function(result){
                     mNotice(result.message,'error');
