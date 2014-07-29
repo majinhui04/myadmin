@@ -203,6 +203,7 @@ define(function(require, exports, module) {
             userDao.current({__action:'user.current'},function(result){
                 var user = result.data || {};
 
+                user.avatar = '/assets/img/admin/user-avatar.jpg';
                 $scope.user = IGrow.user = user;
 
                 initRouteConifg();
@@ -218,13 +219,16 @@ define(function(require, exports, module) {
 
         // 初始化路由
         function initRouteConifg(){
-
-            if(!location.hash){
-                location.hash = '#/dashboard';
-            }
+           
             // 配置路由
             routeConfig(IGrow.modules);
             $route.reload();
+
+            if(!location.hash){
+                $('#dashboard-link').trigger('click');
+                //location.hash = '#/dashboard';
+            }
+                
 
         }
         function bind(){

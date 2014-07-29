@@ -242,6 +242,7 @@ class UserDao extends Dao{
 
         if( isset($_SESSION['user_email']) ){
             $reuslt = new StdClass;
+            $reuslt->id = $_SESSION['user_id'];
             $reuslt->name = $_SESSION['user_name'];
             $reuslt->email = $_SESSION['user_email'];
             $ret->data = $reuslt;

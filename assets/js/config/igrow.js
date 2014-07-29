@@ -153,7 +153,7 @@
                     console.log(111)
                     
                 },
-                template: '<div class="wrapper"><div class="welcome"><img src="/assets/img/public/welcome.jpg"></div></div>',
+                template: '<div class="wrapper"><div class="welcome"><div class="welcome-txt">欢迎使用文章管理系统</div></div>',
                 dependency:[],
                 description:'作业详情-跳转'
             },

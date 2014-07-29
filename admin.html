@@ -29,9 +29,9 @@
         <span class="info">后台管理</span>
         <div class="user-wrapper">
             <span class="user-avatar">
-
+                <img ng-src="{{user.avatar}}">
             </span>
-            <span class="user-name">欢迎您,{{user.name}}</span>
+            <span class="user-name">欢迎您,<a href="#/user/update/{{user.id}}" ng-bind="user.name" class="user-link"></a></span>
             <a href="{{logout}}" class="user-logout-link" title="退出">
                 <i class="fa fa-power-off"></i>
             </a>
@@ -41,7 +41,7 @@
         <div class="sidebar">
             <ul class="sidebar-ul">
                 <li>
-                    <a href="#/dashboard" class="sidebar-link" ng-click="reload($event)">
+                    <a href="#/dashboard" class="sidebar-link" ng-click="reload($event)" id="dashboard-link">
                         <span class="sidebar-icon fa fa-dashboard"></span>
                         <span class="sidebar-txt">首页</span>
                     </a>
