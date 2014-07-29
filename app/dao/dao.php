@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_errors', 'off');
 /*$path = dirname(__FILE__);*/
 include('../conn/db_sqlite.php');
@@ -141,6 +142,7 @@ class ArticleDao extends Dao{
             return '{"code":500,"message":"there are something wrong "}';
         }
     }
+
     function ajax_list(){
         $opts = Util::create_obj('{"_page":1,"_pagesize":"100"}');
         $articleTypeDao = new ArticleTypeDao();
@@ -149,9 +151,11 @@ class ArticleDao extends Dao{
         $ret = json_decode('{"code":0,"message":"success"}');
 
         $params = $this->getListParams();
-
-        $array = $this->_list($params);
-        $count = $this->_count($params);
+        $title = getRequest('title');
+        $search = $title?" where title like '%$title%' ":"";
+        $order = ' istop desc,id desc ';
+        $array = $this->_list($params,$search,$order);
+        $count = $this->_count($params,$search);
         if( gettype($array) == 'array' ){
             $array = json_encode($array);
             $array = json_decode($array);
@@ -176,6 +180,80 @@ class ArticleDao extends Dao{
     }
 }
 
+/*
+    用户
+
+    id
+    name
+    email
+    cellphone
+    password
+*/
+class UserDao extends Dao{
+    
+    function UserDao(){
+        
+        $this->table = 'user';
+        $this->_pagesize = 10;
+    }
+    function getUpdateParams(){
+        $record = json_decode('{}');
+        
+        $id = getRequest('id');
+        $name = getRequest('name');
+        $email = getRequest('email');
+        $cellphone = getRequest('cellphone');
+        $password = getRequest('password');
+        
+        $record->id = $id;
+        $record->name = $name;
+        $record->email = $email;
+        $record->cellphone = $cellphone;
+        $record->password = $password;
+          
+        if( empty($id) ){
+            $record = json_decode('{"code":500}');
+            $record->message = '参数不完整';
+        }
+        return $record;
+    }
+    function getCreateParams(){
+        $record = json_decode('{}');
+
+        $name = getRequest('name');
+        $email = getRequest('email');
+        $cellphone = getRequest('cellphone');
+        $password = getRequest('password');
+
+        $record->name = $name;
+        $record->email = $email;
+        $record->cellphone = $cellphone;
+        $record->password = $password;
+
+        if( empty($name) or empty($email) or empty($cellphone) or empty($password) ){
+            $record = json_decode('{"code":500}');
+            $record->message = '参数不完整';
+        }
+              
+        return $record;
+    }
+    function ajax_current(){
+        $ret = json_decode('{"code":0,"message":"success"}');
+
+        if( isset($_SESSION['user_email']) ){
+            $reuslt = new StdClass;
+            $reuslt->name = $_SESSION['user_name'];
+            $reuslt->email = $_SESSION['user_email'];
+            $ret->data = $reuslt;
+            return json_encode($ret);
+        }else{
+            header('HTTP/1.1 500');
+            return '{"code":500,"message":""}';
+        }
+    }
+
+}
+
 
 /* 中转站 */
 class Router{
@@ -196,6 +274,14 @@ class Router{
             'article.delete'=>'ArticleDao',
             'article.bulkdelete'=>'ArticleDao',
             'article.get'=>'ArticleDao',
+
+            'user.list'=>'UserDao',
+            'user.update'=>'UserDao',
+            'user.create'=>'UserDao',
+            'user.delete'=>'UserDao',
+            'user.bulkdelete'=>'UserDao',
+            'user.get'=>'UserDao',
+            'user.current'=>'UserDao',
 
 
         );
@@ -270,8 +356,6 @@ function test2(){
     
     return true;
 }
-function sqlite_logger($content){
-    file_put_contents("sqlite_log.html",date('Y-m-d H:i:s ').$content.'<br>',FILE_APPEND);
-}
+
 
 ?>

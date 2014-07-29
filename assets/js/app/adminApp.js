@@ -184,9 +184,9 @@ define(function(require, exports, module) {
         return Utils.mNotice;
     });
     app.controller('adminController',['$scope','$q','$route','$timeout','routeConfig','resource', 'mLoading','mNotice','$routeParams','$route',function($scope,$q,$route,$timeout,routeConfig,resource,mLoading,mNotice,$routeParams,$route){
-        var userDao = resource('/user');
+        var userDao = resource('/user',{ extra:'user' },{current:{}});
        
-            
+        $scope.logout = IGrow.logout;
         $scope.reload = function($event){
             var target = $event.currentTarget,
                 href = target.href,
@@ -200,7 +200,7 @@ define(function(require, exports, module) {
         $scope.run = function(){
             bind();
             // 获取当前用户
-            userDao.get({},function(result){
+            userDao.current({__action:'user.current'},function(result){
                 var user = result.data || {};
 
                 $scope.user = IGrow.user = user;
@@ -208,7 +208,8 @@ define(function(require, exports, module) {
                 initRouteConifg();
 
             },function(result){
-                mNotice(result.message,'error');
+                //mNotice(result.message,'error');
+                location.href = IGrow.logout;
             });
         };
 
@@ -301,7 +302,7 @@ define(function(require, exports, module) {
                     title = $target.attr('data-title') || '',
                     $parent = $target.parent();
 
-                console.log(hash,route)
+                //console.log(hash,route)
                 if(!$target.length) {
                     return;
                 }

@@ -62,7 +62,7 @@ define(function(require,module,exports){
                     title = $scope.queryData.title;
 
                 mLoading.show();
-                articleDao.list({ page:page,pagesize:pagesize,title:title },function(result){
+                articleDao.list({ _page:page,_pagesize:pagesize,title:title },function(result){
                     var list = result.data || [], total = result.total || 0;
                     
                     angular.forEach(list, function(item, _){

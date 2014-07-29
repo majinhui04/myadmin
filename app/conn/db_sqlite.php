@@ -404,12 +404,10 @@ class Dao{
     }
     //select * from keyword where messagetypes like '2,%' or messagetypes like '%,2,%' or messagetypes like '%,2';
     //待改进 $condition
-    function _count($opts){
+    function _count($opts,$search=' where 1=1 '){
         $table = $this->table;
         $result = null;
-        $condition = $this->getSearchSql($opts);
-    
-        $sql = "select count(*) from $table ".$condition;
+        $sql = "select count(*) from $table ".$search;
         
         try{
             $actions = new DatabaseAction();
@@ -442,7 +440,7 @@ class Dao{
 
     }
     //待改进 $condition
-    function _list($opts){
+    function _list($opts,$search=' where 1=1 ',$order='id desc'){
     
         $table = $this->table;
     
@@ -460,7 +458,7 @@ class Dao{
         $index = $page*$pagesize;
 
         $limit = " limit $index,$pagesize";
-        $sql = "select * from $table ".$condition." order by id desc ".$limit;
+        $sql = "select * from $table ".$search." order by $order ".$limit;
         
         
         try{
@@ -594,5 +592,8 @@ function getRequest($name=''){
 }
 function error_logger($content){
     file_put_contents("error_log.html",date('Y-m-d H:i:s ').$content.'<br>',FILE_APPEND);
+}
+function sqlite_logger($content){
+    file_put_contents("sqlite_log.html",date('Y-m-d H:i:s ').$content.'<br>',FILE_APPEND);
 }
 ?>

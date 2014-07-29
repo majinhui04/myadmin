@@ -9,7 +9,7 @@ define(function(require, exports, module) {
     // 列表
     app.register.controller('userController', ['$scope', '$q', 'mLoading','mNotice','resource',
         function($scope, $q, mLoading,mNotice,resource) {
-            var userDao = resource('/user');
+            var userDao = resource('/user',{ extra:'user' });
 
             // 批量删除 默认disabled
             $scope.checked = false;
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
             $scope.list = function(){
                 
                 mLoading.show();
-                userDao.list({ },function(result){
+                userDao.list({ xx:222 },function(result){
                     var list = result.data || [];
                     
                     $scope.dataList = list;
@@ -102,7 +102,7 @@ define(function(require, exports, module) {
     // 更新
     app.register.controller('userUpdateController', ['$scope', '$q', 'mLoading','mNotice','resource','$routeParams',
         function($scope, $q, mLoading,mNotice,resource,$routeParams) {
-            var userDao = resource('/user'),
+            var userDao = resource('/user',{ extra:'user' }),
                 id = $routeParams.id;
 
             $scope._action = '修改';
@@ -125,7 +125,7 @@ define(function(require, exports, module) {
                 mLoading.show('正在保存');
                 userDao.update(formData,function(){
                     mLoading.success(function(){
-                        location.hash = '#/article_type';
+                        location.hash = '#/user';
                     });
                 },function(result){
                     mLoading.hide();
@@ -148,7 +148,7 @@ define(function(require, exports, module) {
     // 添加
     app.register.controller('userAddController', ['$scope', '$q', 'mLoading','mNotice','resource','$routeParams',
         function($scope, $q, mLoading,mNotice,resource,$routeParams) {
-            var userDao = resource('/user');
+            var userDao = resource('/user',{ extra:'user' });
 
             $scope._action = '添加';
             $scope.formData = {};

@@ -17,31 +17,36 @@
         map:{
             /* 用户 */
             '/user/search':{
-                mode:'demo',
+                //mode:'demo',
                 description:''
             },
             '/user/list':{
-                mode:'demo',
+                //mode:'demo',
                 description:''
             },
             '/user/get':{
-                mode:'demo',
+                //mode:'demo',
                 description:''
             },
             '/user/update':{
-                mode:'demo',
+                //mode:'demo',
                 description:''
             },
             '/user/create':{
-                mode:'demo',
+                //mode:'demo',
                 description:''
             },
             '/user/delete':{
-                mode:'demo',
+                //mode:'demo',
                 description:''
             },
+            '/user/current':{
+                //mode:'demo',
+                description:'获取当前用户'
+            },
             '/user/validate':{
-                mode:'demo',
+                //mode:'demo',
+                server:'/app/dao/login.php',
                 description:''
             },
 
@@ -109,6 +114,9 @@
 (function(){
     
     var IGrow = window['IGrow'] = {
+        login:'/login.html',
+        logout:'/app/dao/logout.php',
+        admin:'/admin.html',
         host:'http://' + location.host,
         dir:'http://' + location.host + '/',
         page:'_page',

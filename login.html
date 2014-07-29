@@ -36,8 +36,7 @@
                 var API = window['API'],
                     key =  '/user/validate',
                     map = API['map'][key],
-                    server = API.mode === 'server'?true:false,
-                    url = server?key:(map.mode === 'demo'?(API.demo + key):key);
+                    url = map.mode === 'demo'?(API.demo + key):map.server?map.server:key;
 
 
                 $('#loginForm').on('submit', function(e){
@@ -58,7 +57,7 @@
                         data: { email: email , password:password }
                     })
                     .done(function(result) {
-                        location.href = './admin.html';
+                        location.href = window['IGrow']['admin'];
                         
                     })
                     .fail(function() {

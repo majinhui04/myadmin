@@ -119,7 +119,7 @@ input.calendar {
 .pagination-wrapper .pagination-info{
     float: left;
 }
-.pagination-count {
+.pagination-focus {
     color: red;
 }
 .search-wrapper{
@@ -193,7 +193,7 @@ input.calendar {
 .table .article-type {
     width: 7%;
 }
-.table .article-show {
+.table .article-show,.table .article-top {
     width: 7%;
 }
 .clearfix:after {

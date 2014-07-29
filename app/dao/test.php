@@ -1,12 +1,14 @@
 <?php
-ini_set('display_errors', 'off');
+session_start();
+/*ini_set('display_errors', 'off');
 $path = dirname(__FILE__);
-echo "$path";
+echo "$path";*/
 
 
 ?>
 
 <?php
+
 /*class Fruit {
     public static $category = "I'm fruit";
     
@@ -23,8 +25,10 @@ class Apple extends Fruit {
 
 Apple::find("Apple");*/
 
-$obj = new StdClass;
+/*$obj = new StdClass;
 $obj->name = new StdClass;
 $obj->name->a=22;
-var_dump($obj); 
+var_dump($obj); */
+
+echo $_SESSION['user_email'].$_SESSION['user_name'];
 ?>
