@@ -30,5 +30,15 @@ $obj->name = new StdClass;
 $obj->name->a=22;
 var_dump($obj); */
 
-echo $_SESSION['user_email'].$_SESSION['user_name'];
+/*echo $_SESSION['user_email'].$_SESSION['user_name'];*/
+?>
+
+<?php
+    $r = new StdClass;
+
+    $r->name = null;
+    $r->istop = 0;
+    //var_dump($r);
+    echo intval($r->name);
+
 ?>

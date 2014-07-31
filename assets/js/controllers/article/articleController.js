@@ -8,7 +8,7 @@ define(function(require,module,exports){
             // 分页
             $scope.pageModel = {
                 page:1,
-                pagesize:3,
+                pagesize:15,
                 total:0   
             };
             // 查询条件
@@ -43,6 +43,23 @@ define(function(require,module,exports){
                 $scope.checked = ret.length>0?true:false;
                 
             };
+            $scope.toTop = function(data){
+                var istop;
+                if(data.istop == 1){
+                    istop = 0;
+                }else {
+                    istop = 1;
+                }
+                mLoading.show('正在处理...');
+                articleDao.update({ id:data.id,istop:istop },function(result){
+                    $scope.list(1,true);
+                },function(result){
+                    mLoading.hide();
+                    mNotice(result.message,'error');
+                },function(){
+
+                });
+            };
             $scope._delete = function(data){
                 var dataList = $scope.dataList || [];
 
@@ -56,17 +73,21 @@ define(function(require,module,exports){
                     Utils.removeItem(dataList,data,'id');
                 });
             };
-            $scope.list = function(page){
+            $scope.list = function(page,refresh){
                 var page = page || 1, 
                     pagesize = $scope.pageModel.pagesize || 20,
                     title = $scope.queryData.title;
 
                 mLoading.show();
+                $scope.pageModel.page = page;
+                $scope.pageModel.total = refresh?0:$scope.pageModel.total;
+
                 articleDao.list({ _page:page,_pagesize:pagesize,title:title },function(result){
                     var list = result.data || [], total = result.total || 0;
                     
                     angular.forEach(list, function(item, _){
                         item._publishtime = item.publishtime || '';
+                        item._publishtime = item._publishtime.substring(0,16);
                         // /item._create_time = item.create_time.substring(0,10);
                     });
                     $scope.dataList = list;

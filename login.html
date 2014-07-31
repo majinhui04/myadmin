@@ -54,7 +54,7 @@
                         url: url,
                         type: 'POST',
                         dataType: 'json',
-                        data: { email: email , password:password }
+                        data: { email: $.trim(email) , password:$.trim(password) }
                     })
                     .done(function(result) {
                         location.href = window['IGrow']['admin'];

@@ -75,16 +75,20 @@ class ArticleDao extends Dao{
         $author = getRequest('author');
         $publishtime = getRequest('publishtime');
         
+        //sqlite_logger("id:$id,istop:".gettype($istop)."--1---:".intval($istop));
+
         $record->id =  $id;
-        $record->title =  $title?$title:'';
-        $record->content =  $content?$content:'';
-        $record->typeid =  $typeid?intval($typeid):'';
-        $record->istop =  intval($istop);
-        $record->isshow =  intval($isshow);
-        $record->author =  $author?$author:'';
-        $record->publishtime =  $publishtime?$publishtime:date('Y-m-d H:i:s');
-          
-        if( empty($id) or empty($title)  ){
+        $record->title =  isset($title)?$title:null;
+        $record->content =  isset($content)?$content:null;
+        $record->typeid =  !empty($typeid)?intval($typeid):null;
+        $record->istop =  isset($istop)?intval($istop):null;
+        $record->isshow =  isset($isshow)?intval($isshow):null;
+        $record->author =  isset($author)?$author:null;
+        $record->publishtime =  isset($publishtime)?$publishtime:null;
+
+        //sqlite_logger("id:$id,istop:".isset($istop)."--222---:".$record->istop.',title:'.$record->title);
+        //date('Y-m-d H:i:s');
+        if( empty($id) ){
             $record = json_decode('{"code":500}');
             $record->message = 'update 参数不完整';
         }
@@ -252,6 +256,7 @@ class UserDao extends Dao{
             return '{"code":500,"message":""}';
         }
     }
+
 
 }
 

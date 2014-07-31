@@ -484,9 +484,10 @@ class Dao{
             if($key == 'id'){
 
             }else{
+                //sqlite_logger($key."->".$value."->".gettype($value)."   ");
                 if(gettype($value) == 'integer'){
                     $array[] = "$key = $value";
-                }else if(gettype($value) == 'string'){
+                }else if(gettype($value) == 'string' ){
                     $array[] = "$key = '$value'";
                 }
             }   
@@ -580,11 +581,11 @@ class Dao{
 
 // 获取url参数
 function getRequest($name=''){
-    $result = '';
+    $result = null;
 
-    if($_POST[$name]){
+    if(isset($_POST[$name])){
         $result = $_POST[$name];
-    }else if($_GET[$name]){
+    }else if(isset($_GET[$name])){
         $result = $_GET[$name];
     }
 
