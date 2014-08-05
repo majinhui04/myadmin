@@ -117,11 +117,12 @@ h1{
     background-position:0 -48px;
 }
 
-#main #password1{
+#main #password{
+    margin-bottom: 10px;
     background-position:0 -96px;
 }
 
-#main #password1:focus{
+#main #password:focus{
     background-position:0 -144px;
 }
 
@@ -130,6 +131,24 @@ h1{
     line-height: 40px;
     text-align: center;
     color: red;
+}
+.remember-me{
+    width: 320px;
+    margin: 0 auto;
+    color: #999;
+    text-align: left;
+    padding: 7px 0;
+}
+.remember-checkbox{
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+.remember-txt {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
 }
 /*----------------------------
     The Submit Button

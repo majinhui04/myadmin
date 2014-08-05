@@ -224,10 +224,11 @@ define(function(require, exports, module) {
             routeConfig(IGrow.modules);
             $route.reload();
 
-            if(!location.hash){
+            /*if(!location.hash){
                 $('#dashboard-link').trigger('click');
+                // location.hash ie8下会一直刷新
                 //location.hash = '#/dashboard';
-            }
+            }*/
                 
 
         }

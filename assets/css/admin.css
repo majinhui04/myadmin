@@ -122,6 +122,9 @@ textarea.form-group-input {
     padding-top: 15px;
     padding-bottom: 15px;
 }
+.form-group-action button,.form-group-action a {
+    margin-right: 7px;
+}
 .form-tips {
     color: #ccc;
 }
@@ -230,6 +233,7 @@ input.calendar {
     margin: 0;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
 }
 .headline1-txt {
     float: left;
@@ -403,6 +407,44 @@ input.calendar {
 .content-view {
     padding: 15px;
 }
+/*文章预览*/
+.article-preview-wrapper {
+    padding: 30px;
+}
+.article-preview-title {
+    text-align: center;
+    margin: 10px 0;
+}
+.article-preview-info {
+    text-align: center;
+    color: #999;
+    line-height: 30px;
+    font-size: 12px;
+}
+.article-preview-info span{
+    margin-right: 10px;
+}
+.article-preview-content {
+    padding: 15px 0 ;
+}
+.article-preview-actions {
+    text-align: right;
+    padding: 15px;
+}
+.article-preview-actions a {
+    margin-left: 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /* 天蓝色风格 */
 .style-blue-1 {

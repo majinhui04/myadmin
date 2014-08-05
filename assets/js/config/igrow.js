@@ -127,9 +127,9 @@
         seajs_dir:'', // 配置seajs路径
         modules:[
             /* 公共 */
-            /*{
-                redirectTo:'/error'
-            },*/
+            {
+                redirectTo:'/dashboard'
+            },
             {
                 body:'404',
                 route:'/404',
@@ -150,7 +150,7 @@
                 route:'/dashboard',
                 title:'首页',
                 controller: function($scope, $routeParams, $location) {
-                    console.log(111)
+                    console.log('dashboard')
                     
                 },
                 template: '<div class="wrapper"><div class="welcome"><div class="welcome-txt">欢迎使用文章管理系统</div></div>',
@@ -219,6 +219,15 @@
                 title:'文章编辑',
                 controllerUrl:'/assets/js/controllers/article/articleEditController.js',
                 templateUrl:'/assets/js/controllers/article/articleEdit.html',
+                description:''
+            },
+            // 文章预览
+            {
+                route:'/article/preview/:id',
+                controller:'articlePreviewController',
+                title:'文章预览',
+                controllerUrl:'/assets/js/controllers/article/articlePreviewController.js',
+                templateUrl:'/assets/js/controllers/article/articlePreview.html',
                 description:''
             },
 

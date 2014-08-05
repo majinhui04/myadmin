@@ -5,6 +5,7 @@
         <title>用户登录</title>
         <link rel="stylesheet" href="./assets/css/login.css" />
         <script type="text/javascript" src="./assets/js/libs/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="./assets/js/plugins/jquery/jquery.cookie.js"></script>
         <script type="text/javascript" src="./assets/js/config/igrow.js"></script>
     </head>
     
@@ -21,11 +22,15 @@
                 <div class="row email">
                     <input type="text" id="email" name="email" placeholder="Email" />
                 </div>
-                
                 <div class="row pass">
                     <input type="password" id="password" name="password" placeholder="Password" />
                 </div>
-                
+                <div class="remember-me">
+                    <label>
+                        <input type="checkbox" name="remember" class="remember-checkbox" id="remember-checkbox">
+                        <span class="remember-txt">记住我</span>
+                    </label>
+                </div>
                 
                 <input type="submit" value="登录" id="submit" />
                 
@@ -38,13 +43,22 @@
                     map = API['map'][key],
                     url = map.mode === 'demo'?(API.demo + key):map.server?map.server:key;
 
-
+                $('#email').focus();
+                // 判断cookie账号
+                if($.cookie('remember')){
+                    $('#email').val($.cookie('email'));
+                    document.getElementById('remember-checkbox').checked = true;
+                }
+                console.log($.cookie('email'),$.cookie('remember'))
+                // 点击登录
                 $('#loginForm').on('submit', function(e){
                     var email = $('#email').val(),
-                        password = $('#password').val();
+                        password = $('#password').val(),
+                        remember = document.getElementById('remember-checkbox').checked;
+
 
                     e.preventDefault();
-
+                    
                     if(!email || !password) {
                         $('.error-tips').html('不能为空');
                         return;
@@ -57,6 +71,14 @@
                         data: { email: $.trim(email) , password:$.trim(password) }
                     })
                     .done(function(result) {
+                        if(remember){
+                            $.cookie('email',email,{ expires:7 });
+                            $.cookie('remember','true',{ expires:7 });
+                        }else {
+                            $.removeCookie('email');
+                            $.removeCookie('remember');
+                        }
+                        
                         location.href = window['IGrow']['admin'];
                         
                     })
@@ -70,6 +92,8 @@
                     
 
                 });
+
+                
 
 
             });
